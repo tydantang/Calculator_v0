@@ -3,7 +3,7 @@ import os
 
 app = Flask(__name__)
 
-template_dir = os.path.abspath('./')
+template_dir = os.path.abspath('templates')
 app.template_folder = template_dir
 
 @app.route('/')
