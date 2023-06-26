@@ -1,10 +1,12 @@
-runtime: python39
+runtime: python310
 
 entrypoint: gunicorn -b :$PORT main:app
 
+instance_class: F2
+
 env_variables:
-  FLASK_ENV: production
-  SECRET_KEY: 6a449b4d7e2f8c6eb5f07e5a256638f1
+  FLASK_ENV: 'production'
+  SECRET_KEY: '6a449b4d7e2f8c6eb5f07e5a256638f1'
 
 automatic_scaling:
   target_cpu_utilization: 0.65
