@@ -1,6 +1,6 @@
 # RO_Calculator
-Test:/n
+Test:<br />
 Test deploying a basic calculator
 
-DBRK_Damage:/n
+DBRK_Damage:<br />
 Test deploying a DBRK damage calculator
