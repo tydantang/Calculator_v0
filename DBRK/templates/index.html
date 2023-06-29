@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>RO計算機（陽春版）</title>
+    <style>
+        .calculator-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-gap: 10px;
+        }
+
+        .calculator-grid label {
+            text-align: left;
+        }
+
+/*        #Base_HP,
+        #Base_SP {
+            display: none;
+        }*/
+    </style>
+</head>
+<body>
+    <h1>口水龍傷害計算</h1>
+    <form id="calculator-form">
+        <p>預設攻擊對象：Izlude Neutral Egg</p>
+        <p>預設所需技能皆滿等</p>
+        <h2>現在素質</h2>
+        <div class="calculator-grid">
+            <div>
+                <label for="Base_LV">Base_LV</label>
+                <input type="hidden" id="Base_LV" name="Base_LV" value="0">
+                <input type="text" placeholder="輸入 Base_LV" oninput="updateHiddenInput('Base_LV', this.value)">
+            </div>
+            <div></div> <!-- 空白區域 -->
+            <div></div> <!-- 空白區域 -->
+            <div></div> <!-- 空白區域 -->
+            <div>
+                <label for="Max_HP">Max_HP</label>
+                <input type="hidden" id="Max_HP" name="Max_HP" value="0">
+                <input type="text" placeholder="輸入 Max_HP" oninput="updateHiddenInput('Max_HP', this.value)">
+            </div>
+            <div>
+                <label for="Max_SP">Max_SP</label>
+                <input type="hidden" id="Max_SP" name="Max_SP" value="0">
+                <input type="text" placeholder="輸入 Max_SP" oninput="updateHiddenInput('Max_SP', this.value)">
+            </div>
+            <div>
+                <label for="Vit">總Vit</label>
+                <input type="hidden" id="Vit" name="Vit" value="0">
+                <input type="text" placeholder="輸入 總Vit" oninput="updateHiddenInput('Vit', this.value)">
+            </div>
+            <div>
+                <label for="Int">總Int</label>
+                <input type="hidden" id="Int" name="Int" value="0">
+                <input type="text" placeholder="輸入 總Int" oninput="updateHiddenInput('Int', this.value)">
+            </div>
+            <div>
+                <label for="Add_HP">總+HP（非％）</label>
+                <input type="hidden" id="Add_HP" name="Add_HP" value="0">
+                <input type="text" placeholder="輸入 總+HP（非％）" oninput="updateHiddenInput('Add_HP', this.value)">
+            </div>
+            <div>
+                <label for="Add_SP">總+SP（非％）</label>
+                <input type="hidden" id="Add_SP" name="Add_SP" value="0">
+                <input type="text" placeholder="輸入 總+SP（非％）" oninput="updateHiddenInput('Add_SP', this.value)">
+            </div>
+            <div>
+                <label for="Perc_HP">總+HP%</label>
+                <input type="hidden" id="Perc_HP" name="Perc_HP" value="0">
+                <input type="text" placeholder="輸入 總+HP%" oninput="updateHiddenInput('Perc_HP', this.value)">
+            </div>
+            <div>
+                <label for="Perc_SP">總+SP%</label>
+                <input type="hidden" id="Perc_SP" name="Perc_SP" value="0">
+                <input type="text" placeholder="輸入 總+SP%" oninput="updateHiddenInput('Perc_SP', this.value)">
+            </div>
+            <div></div> <!-- 空白區域 -->
+            <div></div> <!-- 空白區域 -->
+            <div>
+                <label for="Perc_Skill">總+Skill%</label>
+                <input type="hidden" id="Perc_Skill" name="Perc_Skill" value="0">
+                <input type="text" placeholder="輸入 總+Skill%" oninput="updateHiddenInput('Perc_Skill', this.value)">
+            </div>
+            <div>
+                <label for="Perc_LR">總+LR%</label>
+                <input type="hidden" id="Perc_LR" name="Perc_LR" value="0">
+                <input type="text" placeholder="輸入 總+LR%" oninput="updateHiddenInput('Perc_LR', this.value)">
+            </div>
+        </div>
+        <h2>對比素質</h2>
+        <div class="calculator-grid">
+            <div>
+                <label for="Vit_new">總Vit</label>
+                <input type="hidden" id="Vit_new" name="Vit_new" value="0">
+                <input type="text" placeholder="輸入 總Vit" oninput="updateHiddenInput('Vit_new', this.value)">
+            </div>
+            <div>
+                <label for="Int_new">總Int</label>
+                <input type="hidden" id="Int_new" name="Int_new" value="0">
+                <input type="text" placeholder="輸入 總Int" oninput="updateHiddenInput('Int_new', this.value)">
+            </div>
+            <div>
+                <label for="Add_HP_new">總+HP（非％）</label>
+                <input type="hidden" id="Add_HP_new" name="Add_HP_new" value="0">
+                <input type="text" placeholder="輸入 總+HP（非％）" oninput="updateHiddenInput('Add_HP_new', this.value)">
+            </div>
+            <div>
+                <label for="Add_SP_new">總+SP（非％）</label>
+                <input type="hidden" id="Add_SP_new" name="Add_SP_new" value="0">
+                <input type="text" placeholder="輸入 總+SP（非％）" oninput="updateHiddenInput('Add_SP_new', this.value)">
+            </div>
+            <div>
+                <label for="Perc_HP_new">總+HP%</label>
+                <input type="hidden" id="Perc_HP_new" name="Perc_HP_new" value="0">
+                <input type="text" placeholder="輸入 總+HP%" oninput="updateHiddenInput('Perc_HP_new', this.value)">
+            </div>
+            <div>
+                <label for="Perc_SP_new">總+SP%</label>
+                <input type="hidden" id="Perc_SP_new" name="Perc_SP_new" value="0">
+                <input type="text" placeholder="輸入 總+SP%" oninput="updateHiddenInput('Perc_SP_new', this.value)">
+            </div>
+            <div></div> <!-- 空白區域 -->
+            <div></div> <!-- 空白區域 -->
+            <div>
+                <label for="Perc_Skill_new">總+Skill%</label>
+                <input type="hidden" id="Perc_Skill_new" name="Perc_Skill_new" value="0">
+                <input type="text" placeholder="輸入 總+Skill%" oninput="updateHiddenInput('Perc_Skill_new', this.value)">
+            </div>
+            <div>
+                <label for="Perc_LR_new">總+LR%</label>
+                <input type="hidden" id="Perc_LR_new" name="Perc_LR_new" value="0">
+                <input type="text" placeholder="輸入 總+LR%" oninput="updateHiddenInput('Perc_LR_new', this.value)">
+            </div>
+        </div>
+        <button type="submit">計算</button>
+    </form>
+    <div>
+<!--         <p>Base HP：<span id="Base_HP"></span></p>
+        <p>Base SP：<span id="Base_SP"></span></p> -->
+        <p>Current DB Damage: <span id="DB_Damage"></span></p>
+        <p>New Max HP: <span id="Max_HP_new"></span></p>
+        <p>New Max SP: <span id="Max_SP_new"></span></p>
+        <p>New DB Damage: <span id="DB_Damage_new"></span></p>
+    </div>
+
+    <script>
+        document.getElementById('calculator-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            var formData = new FormData(document.getElementById('calculator-form'));
+            calculate(formData);
+        });
+
+        function calculate(formData) {
+            fetch('/calculate', {
+                method: 'POST',
+                body: formData
+            })
+            .then(function(response) {
+                return response.json();
+            })
+            .then(function(result) {
+                // document.getElementById('Base_HP').innerText = result.Base_HP;
+                // document.getElementById('Base_SP').innerText = result.Base_SP;
+                document.getElementById('DB_Damage').innerText = result.DB_Damage;
+                document.getElementById('Max_HP_new').innerText = result.Max_HP_new;
+                document.getElementById('Max_SP_new').innerText = result.Max_SP_new;
+                document.getElementById('DB_Damage_new').innerText = result.DB_Damage_new;
+            });
+        }
+
+        function updateHiddenInput(inputId, value) {
+            document.getElementById(inputId).value = value;
+        }
+    </script>
+</body>
+</html>
